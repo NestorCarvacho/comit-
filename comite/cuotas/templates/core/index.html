@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <!-- importar bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="principal"></div>
+    <div class="arriba">
+        <h1>Cuotas</h1>
+        <h3>Cuota Actual: {{ultima_cuota.nombre_cuota}}</h3>
+        <a href="{% url 'login' %}" type="button" class="btn btn-primary">Directiva</a>
+    </div>
+    <div class="abajo">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">RUN Vecino</th>
+            <th scope="col">Cuota</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha Pago</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for cuotas in cuotas_persona %}
+            <tr>
+                <th scope="row">{{cuotas.id_cuota_persona}}</th>
+                <td>{{cuotas.persona.rut_persona}}</td>
+                <td>{{cuotas.cuota.nombre_cuota}}</td>
+                <td>${{cuotas.monto_cuota}}</td>
+                <td>{{cuotas.fecha}}</td>
+                {% if cuotas.estado == True %}
+                <td>Pagada</td>
+                {% else %}
+                <td>No Pagada</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
